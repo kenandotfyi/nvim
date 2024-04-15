@@ -21,7 +21,10 @@ return {
         s = { "<cmd>w<cr>", "Save file" },
       },
       ["<leader><tab>"] = { name = "+tabs" },
-      ["<leader>b"] = { name = "+buffer" },
+      ["<leader>b"] = {
+        name = "+buffer",
+        s = { "<cmd>BufferLinePick<CR>", "Buffer Line Pick" },
+      },
       ["<leader>c"] = { name = "+code" },
       ["<leader>g"] = { name = "+git" },
       ["<leader>gh"] = { name = "+hunks" },
