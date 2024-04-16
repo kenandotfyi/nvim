@@ -26,6 +26,16 @@ return {
     },
   },
 
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  },
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -129,6 +139,7 @@ return {
       ensure_installed = {
         "bash",
         "html",
+        "astro",
         "javascript",
         "json",
         "lua",
@@ -141,6 +152,21 @@ return {
         "typescript",
         "vim",
         "yaml",
+      },
+    },
+  },
+
+  -- for mdx formatting.
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      overrides = {
+        config = function(_, opts)
+          dofile(vim.g.base46_cache .. "syntax")
+          require("nvim-treesitter.configs").setup(opts)
+          -- tell treesitter to use the markdown parser for mdx files
+          vim.treesitter.language.register("markdown", "mdx")
+        end,
       },
     },
   },
