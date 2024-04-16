@@ -9,6 +9,18 @@ return {
         ["cmp.entry.get_documentation"] = true,
       },
     },
+    views = {
+      cmdline_popup = {
+        border = {
+          style = "none",
+          padding = { 2, 3 },
+        },
+        filter_options = {},
+        win_options = {
+          winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+        },
+      },
+    },
     routes = {
       {
         filter = {

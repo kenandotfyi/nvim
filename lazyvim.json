@@ -1,6 +1,10 @@
 {
   "extras": [
-
+    "lazyvim.plugins.extras.editor.harpoon2",
+    "lazyvim.plugins.extras.editor.leap",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.ui.mini-animate",
+    "lazyvim.plugins.extras.util.project"
   ],
   "news": {
     "NEWS.md": "3314"
