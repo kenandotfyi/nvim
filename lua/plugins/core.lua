@@ -27,6 +27,32 @@ return {
   },
 
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+    opts = {
+      disable_filetype = { "TelescopePrompt", "vim" },
+      enable_check_bracket_line = false,
+      ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbols
+      -- change default fast_wrap
+      fast_wrap = {
+        map = "<M-e>",
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = [=[[%'%"%>%]%)%}%,]]=],
+        end_key = "$",
+        before_key = "h",
+        after_key = "l",
+        cursor_pos_before = true,
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        manual_position = true,
+        highlight = "Search",
+        highlight_grey = "Comment",
+      },
+    },
+  },
+  {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -171,6 +197,14 @@ return {
     },
   },
 
+  -- autotag
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      autotag = true,
+    },
+  },
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
   -- would overwrite `ensure_installed` with the new value.
   -- If you'd rather extend the default config, use the code below instead:
