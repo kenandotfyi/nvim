@@ -62,6 +62,7 @@ return {
       })
     end,
   },
+
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -101,7 +102,6 @@ return {
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         winblend = 0,
-        initial_mode = "normal",
       },
     },
   },
@@ -321,5 +321,8 @@ return {
         update_n_lines = "gsn",
       },
     },
+  },
+  {
+    "simrat39/rust-tools.nvim",
   },
 }

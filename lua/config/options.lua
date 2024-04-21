@@ -7,6 +7,7 @@ vim.opt.winbar = "%=%m %f"
 vim.opt.undofile = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
+vim.opt.wrap = true
 
 vim.opt.scrolloff = 10
 
