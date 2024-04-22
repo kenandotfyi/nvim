@@ -8,8 +8,9 @@ vim.opt.undofile = true
 vim.opt.termguicolors = true
 vim.opt.updatetime = 50
 vim.opt.wrap = true
-
 vim.opt.scrolloff = 10
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 5
 
 vim.opt.guicursor = {
   "n-v-c:block", -- Normal, visual, command-line: block cursor

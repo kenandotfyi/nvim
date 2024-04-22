@@ -22,7 +22,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "catppuccin",
     },
   },
 
@@ -174,10 +174,17 @@ return {
         "python",
         "query",
         "regex",
+        "rust",
         "tsx",
         "typescript",
+        "toml",
         "vim",
         "yaml",
+      },
+      rainbow = {
+        enable = true,
+        extended_mode = true,
+        max_file_lines = nil,
       },
     },
   },
@@ -307,22 +314,9 @@ return {
     end,
   },
 
-  -- change surround mappings
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "gsa",
-        delete = "gsd",
-        find = "gsf",
-        find_left = "gsF",
-        highlight = "gsh",
-        replace = "gsr",
-        update_n_lines = "gsn",
-      },
-    },
-  },
-  {
-    "simrat39/rust-tools.nvim",
-  },
+  -- rust tools
+  -- {
+  --   "simrat39/rust-tools.nvim",
+  -- },
+  { "thehamsta/nvim-dap-virtual-text" },
 }
