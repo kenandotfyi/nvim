@@ -18,6 +18,11 @@ return {
     },
   },
 
+  -- disable leap
+  {
+    "ggandor/leap.nvim",
+    enabled = false,
+  },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
