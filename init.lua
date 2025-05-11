@@ -13,10 +13,11 @@ vim.keymap.set("n", "<right>", ":bn<cr>")
 vim.keymap.set("n", "<leader>o", ':e <C-R>=expand("%:p:h") . "/" <cr>')
 -- <leader>, shows/hides hidden characters
 vim.keymap.set("n", "<leader>h", ":set invlist<cr>")
-
+-- change jk to ESC
+vim.keymap.set("i", "jk", "<Esc>")
 -- BELOW IS THE PLUGIN CONFIG
 -- bootstrap lazy.nvim, LazyVim and your plugins
-
+--
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -62,6 +63,8 @@ require("lazy").setup({
       lazy = false, -- load at start
       priority = 1000, -- load first
     },
+
+    -- Noice
     {
       "folke/noice.nvim",
       event = "VeryLazy",
@@ -71,8 +74,23 @@ require("lazy").setup({
         },
       },
     },
-
-    -- For rust development. This is currently the best option for complete Rust environment.
+    -- modifying lualine
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      opts = function()
+        return {
+          options = {
+            icons_enabled = false,
+            theme = "gruvbox_dark",
+            component_separators = { left = "", right = "" },
+            section_separators = { left = "", right = "" },
+            always_show_tabline = true,
+          },
+        }
+      end,
+    },
+    -- main Rust environment plugin
     {
       "mrcjkb/rustaceanvim",
       version = "^6", -- Recommended
@@ -135,11 +153,57 @@ require("lazy").setup({
         },
       },
     },
+    -- go to the root dir of current file
     {
       "notjedi/nvim-rooter.lua",
       config = function()
         require("nvim-rooter").setup()
       end,
+    },
+
+    -- delete buffers with mini
+    {
+      "echasnovski/mini.bufremove",
+      keys = {
+        {
+          "<leader>k",
+          function()
+            local bd = require("mini.bufremove").delete
+            if vim.bo.modified then
+              local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
+              if choice == 1 then -- Yes
+                vim.cmd.write()
+                bd(0)
+              elseif choice == 2 then -- No
+                bd(0, true)
+              end
+            else
+              bd(0)
+            end
+          end,
+          desc = "Delete Buffer",
+        },
+      },
+    },
+    -- using <Tab> for completions and snippets
+    --
+    {
+      "saghen/blink.cmp",
+      opts = {
+        keymap = {
+          ["<Tab>"] = {
+            function(cmp)
+              if cmp.snippet_active() then
+                return cmp.accept()
+              else
+                return cmp.select_and_accept()
+              end
+            end,
+            "snippet_forward",
+            "fallback",
+          },
+        },
+      },
     },
   },
   defaults = {
