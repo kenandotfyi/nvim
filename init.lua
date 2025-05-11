@@ -50,6 +50,25 @@ require("lazy").setup({
       event = "LspAttach",
       opts = {}, -- required, even if empty
     },
+
+    -- indent lines
+    {
+      "folke/snacks.nvim",
+      opts = {
+        indent = {
+          enabled = true,
+          indent = {
+            enabled = false,
+          },
+          chunk = {
+            enabled = true,
+            char = {
+              arrow = ">",
+            },
+          },
+        },
+      },
+    },
     {
       "ibhagwan/fzf-lua",
       config = function()
