@@ -335,3 +335,35 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     vim.opt.list = false
   end,
 })
+
+-- showing the cwd in tmux window names
+vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" }, {
+  callback = function()
+    local cwd = vim.fn.getcwd()
+    local pane = vim.fn.getenv("TMUX_PANE")
+
+    vim.notify("cwd: " .. cwd, vim.log.levels.INFO)
+    vim.notify("pane: " .. vim.inspect(pane), vim.log.levels.INFO)
+
+    if pane and pane ~= "" then
+      local path = vim.fn.expand("~/.config/tmux/nvim_cwd_" .. pane)
+      local ok, err = pcall(function()
+        local file = io.open(path, "w")
+        if file then
+          file:write(cwd)
+          file:close()
+        else
+          vim.notify("❌ Could not open file for writing", vim.log.levels.ERROR)
+        end
+      end)
+
+      if not ok then
+        vim.notify("❌ Write error: " .. err, vim.log.levels.ERROR)
+      else
+        vim.notify("✅ Successfully wrote to " .. path, vim.log.levels.INFO)
+      end
+    else
+      vim.notify("❌ TMUX_PANE not set", vim.log.levels.WARN)
+    end
+  end,
+})
