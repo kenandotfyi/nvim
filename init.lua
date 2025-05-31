@@ -170,6 +170,11 @@ require("lazy").setup({
           "yaml",
           "rust",
         },
+        indent = {
+          disable = {
+            "yaml",
+          },
+        },
       },
     },
     -- go to the root dir of current file
@@ -210,6 +215,7 @@ require("lazy").setup({
       "saghen/blink.cmp",
       opts = {
         keymap = {
+          preset = "default",
           ["<Tab>"] = {
             function(cmp)
               if cmp.snippet_active() then
@@ -221,6 +227,15 @@ require("lazy").setup({
             "snippet_forward",
             "fallback",
           },
+        },
+      },
+    },
+
+    {
+      "stevearc/conform.nvim",
+      opts = {
+        formatters_by_ft = {
+          yaml = { "yamlfmt" },
         },
       },
     },
